@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">All Invoices</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm text-sm table-bordered table-striped">
+                <thead class="bg-info text-white">
+                    <tr>
+                        <th>Invoice #</th>
+                        <th>Date</th>
+                        <th class="text-center">Total Items</th>
+                        <th class="text-center">Total Amount</th>
+                        <th class="text-center">Discount</th>
+                        <th class="text-center">Total Payable</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoice of invoices; let i = index;">
+                        <td>{{invoice.bookingNumber}}</td>
+                        <td>{{invoice.bookingDate}}</td>
+                        <td class="text-center">{{invoice.bookingDetails.length}}</td>
+                        <td class="text-center">{{invoice.totalAmount}}</td>
+                        <td class="text-center">{{invoice.discount}}</td>
+                        <td class="text-center">{{invoice.totalPayable}}</td>
+                        <td class="text-center">{{invoice.status}}</td>
+
+                        <td class="text-center">
+                            <button type="button" routerLink="/invoice/{{invoice.bookingNumber}}" class="btn btn-sm btn-link px-1 py-0 text-success"><i
+                                    class="fas fa-bars"></i></button>&nbsp;
+                            <button type="button" (click)="printInvoice(invoice.bookingNumber)" class="btn btn-sm btn-link px-1 py-0 text-info"><i
+                                    class="fas fa-print"></i></button>&nbsp;
+                            <button type="button" class="btn btn-sm btn-link px-1 py-0 text-danger"><i
+                                    class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
+                <app-pager [pageSize]="invoiceParams.pageSize" [totalCount]="totalCount"
+                    [pageNumber]="invoiceParams.pageNumber" (pageChanged)="pageChanged($event)">
+                </app-pager>
+            </div>
+        </div>
+    </div>
+</div>

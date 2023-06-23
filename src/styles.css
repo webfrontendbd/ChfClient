@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+.autocomplete-container {
+    box-shadow: unset !important;
+    height: 38px !important;
+}
+.autocomplete-container .input-container input {
+    border: 1px solid #ced4da !important;
+    height: 38px !important;
+}
+.form-control {
+    border-radius: unset !important;
+}
+.autocomplete-container .suggestions-container ul li a {
+    padding: 6px !important;
+    font-size: 14px !important;
+}

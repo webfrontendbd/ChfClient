@@ -1,0 +1,21 @@
+<div class="wrapper">
+    <app-topnav></app-topnav>
+    <app-asidenav></app-asidenav>
+    <div class="content-wrapper pt-2">
+        <div class="content">
+            <div class="container-fluid">
+                <ngx-spinner
+                 bdColor = "rgba(0,0,0,0.5)" 
+                 size = "medium" 
+                 color = "#fff" 
+                 type = "timer" 
+                 [fullScreen] = "true">
+                 <p style="color: white" > Loading... </p>
+                </ngx-spinner>
+                <!-- <ngx-spinner type="line-scale-party"></ngx-spinner> -->
+                    <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

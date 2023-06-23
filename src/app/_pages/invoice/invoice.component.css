@@ -1,0 +1,11 @@
+.form-control {
+    border: 1px solid #ececec !important;
+    box-shadow: unset !important;
+}
+.form-group {
+    margin-bottom: 0.35rem !important;
+}
+.input-group-text {
+    color: #6c757d !important;
+    border: 1px solid #ececec !important;
+}

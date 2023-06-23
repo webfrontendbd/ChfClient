@@ -1,0 +1,313 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-7 p-0">
+            <form [formGroup]="invoiceForm" (ngSubmit)="addInvoice()">
+                <div class="card px-2 pb-4 pt-2 mb-2" style="min-height: 430px;">
+                    <div class="card-body pt-2 pb-0">
+                        <div class="row bg-light pt-1">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input  readonly type="text" [minDate]="minDate" [maxDate]="maxDate"
+                                            formControlName="bookingDate" placeholder="Select invoice Date"
+                                            class="form-control  form-control-sm" bsDatepicker
+                                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MMM-YYYY' }">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user-md"></i></span>
+                                        </div>
+                                        <select class="custom-select custom-select-sm" formControlName="doctorId">
+                                            <option *ngFor="let doctor of doctors; let i=index;" [selected]="doctor.id === 1" [value]="doctor.id">{{doctor.doctorName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-hand-holding-medical"></i></span>
+                                        </div>
+                                        <input readonly type="text" [minDate]="deliveryMinDate"
+                                            formControlName="deliveryDate" placeholder="Select delivery Date"
+                                            class="form-control  form-control-sm" bsDatepicker
+                                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD-MMM-YYYY' }">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bg-light">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-procedures"></i></span>
+                                        </div>
+                                        <input class="form-control form-control-sm" type="text" formControlName="patientName" placeholder="Patient name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-calculator"></i></span>
+                                        </div>
+                                        <input class="form-control form-control-sm" type="number" formControlName="age"  placeholder="Age" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <select formControlName="gender" class="custom-select custom-select-sm">
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row bg-light">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone-square"></i></span>
+                                        </div>
+                                        <input formControlName="phone" class="form-control form-control-sm" type="text" placeholder="Phone number" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                        </div>
+                                        <input class="form-control form-control-sm" type="text" formControlName="address" placeholder="Address" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+
+
+                        <div class="row">
+                            <table class="table table-sm text-sm table-bordered table-striped">
+                                <thead class="bg-gradient-info">
+                                    <tr>
+                                        <th class="text-center">SL</th>
+                                        <th class="text-center">Service</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Subtotal</th>
+                                        <th class="text-center"><i class="fas fa-times" aria-hidden="true"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="bookingDetails" *ngIf="invoiceDetails.length > 0">
+                                    <tr *ngFor="let item of invoiceDetails.value; let i=index">
+                                        <ng-container [formGroupName]="i">
+                                            <td class="text-center">{{i+1 }}</td>
+                                            <td>{{item.testName }}</td>
+                                            <td class="text-center">{{item.quantity }}</td>
+                                            <td class="text-center">{{item.price }}</td>
+                                            <td class="text-center">{{item.totalAmount }}</td>
+                                            <td class="text-center"><button (click)="removeInvoiceDetails(i)"
+                                                    class="btn btn-link p-0"><i
+                                                        class="fas fa-times text-danger"></i></button></td>
+                                        </ng-container>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body bg-light p-2">
+                        <div class="row">                            
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm border-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text border-0">
+                                            Total : &nbsp;<i class="fas fa-info-circle text-info"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control form-control-sm border-0" readonly type="number" formControlName="totalAmount" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm border-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text border-0">
+                                            Discount (-) : &nbsp;<i role="button" (click)="openModal(discountmodal)" class="fas fa-edit text-info"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control form-control-sm border-0" readonly type="number" formControlName="discount">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="input-group input-group-sm border-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text border-0">
+                                            Total Payable : &nbsp;<i class="fas fa-info-circle text-info"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control form-control-sm border-0" readonly type="number" formControlName="totalPayable" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-0" formArrayName="payments" >
+                    <ng-container *ngFor="let payment of payments.controls; let i = index">
+                        <ng-container [formGroupName]="i">
+                            <div class="col-md-4">
+                                <div class="row bg-indigo p-2">
+                                    <div class="col-md-4 text-sm font-weight-bold">
+                                        Total Payment
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span>
+                                            <input type="number" class="form-control font-weight-bold" formControlName="amount"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 pt-2">
+                                <select class="custom-select" formControlName="method" (change)="onChangePaymentMethod($event)">
+                                    <option *ngFor="let method of payMethods" [selected]="method.id === 'Cash'" [value]="method.id">{{method.value}}</option>
+                                </select>
+                            </div>
+                        </ng-container>
+                        
+                    </ng-container>                    
+                    
+                    <div class="col-md-2 pt-2">
+                        <button [disabled]="!invoiceForm.valid" type="submit" class="btn btn-success btn-block"><i class="fas fa-save"></i> Save</button>
+                    </div>
+                    <div class="col-md-1 pt-2">
+                        <button class="btn btn-default btn-block"><i class="fas fa-times-circle"></i></button>
+                    </div>
+                </div>
+            </form>
+            <!-- {{this.invoiceForm.value | json}} -->
+        </div>
+
+        <div class="col-md-5">
+            <div class="row m-0 px-2">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-filter"></i> Services Filter By</span>
+                        </div>
+                        <select class="custom-select" (change)="onCategoryChanged($event)">
+                            <option *ngFor="let category of categories" [selected]="category.id === 0"
+                                [value]="category.id">{{category.categoryName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-2">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-default bg-white btn-flat"><i
+                                        class="fas fa-search-plus"></i></button>
+                            </div>
+                            <input class="form-control" placeholder="Search Test By Name"
+                                autofocus="" type="text" autocomplete="off">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default bg-white btn-flat"><i
+                                        class="fa fa-plus-circle text-primary fa-lg"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row p-2 m-0">
+                <div class="col-md-3 mb-2" *ngFor="let product of products; index as i">
+                    <button type="button" (click)="addInvoiceDetails(product)" style="height: 80px;"
+                        class="btn btn-block bg-gradient-info py-2 px-2">
+                        <p class="mb-0 text-center text-sm">{{product.name}}</p>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #discountmodal>
+    <div class="modal-header bg-gradient-danger py-2">
+        <h4 class="card-title pull-left">Discount</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-0">
+                    <label class="text-sm mb-0">Discount Type</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-default bg-white btn-flat"><i
+                                    class="fas fa-info"></i></button>
+                        </div>
+                        <select class="custom-select" #discountType>
+                            <option value="fixed">Fixed</option>
+                            <option value="percent">Percentage</option>
+                        </select>
+                    </div>                        
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-0">
+                    <label class="text-sm mb-0">Discount Amount</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn btn-default bg-white btn-flat"><i
+                                    class="fas fa-info"></i></button>
+                        </div>
+                        <input class="form-control" #discountAmount placeholder="Enter Discount Amount" min="0"
+                            type="number">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer py-2">
+        <button type="button" class="btn btn-sm btn-info" (click)="calculateInvoiceAfterAddingDiscount(discountType.value, discountAmount.value)">Update</button>
+        <button type="button" class="btn btn-sm btn-link"  (click)="modalRef?.hide()">Close</button>
+      </div>
+</ng-template>
+
+<ng-template #multiplePayModal>
+    <div class="modal-header bg-gradient-danger py-2">
+        <h4 class="card-title pull-left">Multiple Payment</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer py-2">
+        <button type="button" class="btn btn-sm btn-info">Finalize Payment</button>
+        <button type="button" class="btn btn-sm btn-link"  (click)="modalRef?.hide()">Close</button>
+      </div>
+</ng-template>

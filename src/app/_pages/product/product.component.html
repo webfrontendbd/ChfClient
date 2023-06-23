@@ -1,0 +1,197 @@
+<button type="button" class="btn btn-link" (click)="openModal(template)"><i class="fas fa-plus-square"></i> Add New
+    Service</button>
+
+<ng-template #template>
+    <div class="modal-header bg-gradient-info py-2">
+        <h4 class="card-title pull-left">Add New Service</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card card-info">
+            <div class="card-body p-3">
+                <form [formGroup]="productForm" (ngSubmit)="saveProduct()" autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Service Name</label>
+                                        <input class="form-control" formControlName="testName"
+                                            placeholder="Enter Service Name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Category</label>
+                                        <select class="custom-select" formControlName="categoryId">                                            
+                                            <option *ngFor="let category of categories" [selected]="category.id === 1" [value]="category.id">{{category.categoryName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Price</label>
+                                        <input class="form-control" type="number" min="0" formControlName="price"
+                                            placeholder="eg. 220" />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Status</label>
+                                        <select class="custom-select" formControlName="isActived">
+                                            <option value="true">Active</option>
+                                            <option value="false">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Description</label>
+                                        <editor apiKey="vsrhzv5442r160fcvhr5oxg6jg5be13gif0p5yiwc00p3x8i" formControlName="description"
+                                            outputFormat="text"
+                                            [init]="{ menubar:false, statusbar: false, height: '160', plugins: 'lists image table code help wordcount' }">
+                                        </editor>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group mb-0">
+                                <p class="mb-0">&nbsp;</p>
+                                <button type="submit" [disabled]="!productForm.valid" class="btn btn-info"><i
+                                        class="fas fa-save"></i> Save Service</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</ng-template>
+
+<ng-template #productUpdateTemplate>
+    <div class="modal-header bg-gradient-info py-2">
+        <h4 class="card-title pull-left">Update New Service</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card card-info">
+            <div class="card-body p-3">
+                <form [formGroup]="productForm" (ngSubmit)="updateProduct()" autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Service Name</label>
+                                        <input class="form-control" formControlName="testName"
+                                            placeholder="Enter Service Name" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Category</label>
+                                        <select class="custom-select" formControlName="categoryId">                                            
+                                            <option *ngFor="let category of categories" [selected]="category.id === 1" [value]="category.id">{{category.categoryName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Price</label>
+                                        <input class="form-control" type="number" min="0" formControlName="price"
+                                            placeholder="eg. 220" />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Status</label>
+                                        <select class="custom-select" formControlName="isActived">
+                                            <option value="true">Active</option>
+                                            <option value="false">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group mb-0">
+                                        <label class="text-sm mb-0">Description</label>
+                                        <editor apiKey="vsrhzv5442r160fcvhr5oxg6jg5be13gif0p5yiwc00p3x8i" formControlName="description"
+                                            outputFormat="text"
+                                            [init]="{ menubar:false, statusbar: false, height: '160', plugins: 'lists image table code help wordcount' }">
+                                        </editor>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group mb-0">
+                                <p class="mb-0">&nbsp;</p>
+                                <button type="submit" [disabled]="!productForm.valid" class="btn btn-info"><i
+                                        class="fas fa-save"></i> Save Chages Service</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</ng-template>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">All Services</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm text-sm table-bordered table-striped">
+                <thead class="bg-info text-white">
+                    <tr>
+                        <th class="text-center">SL #</th>
+                        <th>Service Name</th>
+                        <th>Category</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products; let i = index;">
+                        <td class="text-center">{{product.id}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.categoryName}}</td>
+                        <td class="text-center">{{product.price}}</td>
+                        <td class="text-center">{{product.isActived ==true?'Active':'Inactive'}}</td>
+
+                        <td class="text-center">
+                            <button type="button" (click)="openUpdateModal(product, productUpdateTemplate)" class="btn btn-sm btn-link px-1 py-0 text-info"><i
+                                    class="fa fa-edit"></i></button>&nbsp;
+                            <button type="button" class="btn btn-sm btn-link px-1 py-0 text-danger"><i
+                                    class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
+                <app-pager 
+                    [pageSize]="productParams.pageSize" 
+                    [totalCount]="totalCount"
+                    [pageNumber]="productParams.pageNumber"
+                    (pageChanged)="pageChanged($event)">
+                </app-pager>
+                
+            </div>
+        </div>
+    </div>
+</div>

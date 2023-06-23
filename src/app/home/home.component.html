@@ -1,0 +1,75 @@
+<!-- Small boxes (Stat box) -->
+<div class="row" *ngIf="topCardInfo">
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3>{{topCardInfo.dailySalesAmount | amountSuffix: 2}}</h3>
+
+        <p>Daily Sales</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-bag"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3>{{topCardInfo.totalSalesAmount | amountSuffix: 2}}</h3>
+
+        <p>Total Sales</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3>{{topCardInfo.totalServices}}</h3>
+
+        <p>Total Services</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-add"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-danger">
+      <div class="inner">
+        <h3>{{topCardInfo.totalExpenses | amountSuffix: 2}}</h3>
+
+        <p>Total Expenses</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-9">
+    <highcharts-chart *ngIf="isHighcharts" [Highcharts]="Highcharts" [options]="salesExpensesLineChartOptions"
+     style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+  </div>
+  <div class="col-md-3">
+    <highcharts-chart *ngIf="isHighcharts" [Highcharts]="Highcharts" [options]="topFiveEmployeeBarChartOptions"
+     style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+  </div>
+</div>

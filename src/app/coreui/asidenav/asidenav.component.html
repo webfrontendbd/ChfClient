@@ -1,0 +1,197 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="#" class="brand-link">
+    <img src="/assets/logo-trans.png" alt="AA Salon Logo"
+      class="brand-image img-circle elevation-3 bg-white">
+    <span class="brand-text font-weight-bold">CHF Sys</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user (optional) -->
+    <div class="user-panel mt-2 pb-1 mb-2 d-flex">
+      <div class="image">
+        <img src="/assets/adminlte/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info" *ngIf="(authService.currentUser$ | async) as user">
+        <a href="#" class="d-block">{{user.username | uppercase}}</a>
+        <a class="btn btn-link p-0 text-warning text-sm" (click)="logout()"><i class="fas fa-power-off"></i> Shutdown</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+        <li class="nav-item">
+          <a [routerLink]="['/']" class="nav-link">
+            <i class="nav-icon fab fa-slack"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <div class="nav-link">
+            <i class="fas fa-cog nav-icon"></i>
+            <p>
+              Setup Initial
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </div>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/categories']" class="nav-link text-sm">
+                <i class="fas fa-th-large nav-icon"></i>
+                <p>Categories</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/services']" class="nav-link text-sm">
+                <i class="fab fa-servicestack nav-icon"></i>
+                <p>Services</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/doctors']" class="nav-link text-sm">
+                <i class="fas fa-users nav-icon"></i>
+                <p>Doctors</p>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a [routerLink]="['/employee']" class="nav-link text-sm">
+                <i class="fas fa-users nav-icon"></i>
+                <p>Employee</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li class="nav-item">
+          <div class="nav-link">
+            <i class="fas fa-receipt nav-icon"></i>
+            <p>
+              Invoices
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </div>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/invoices']" class="nav-link text-sm">
+                <i class="fas fa-plus-square nav-icon"></i>
+                <p>
+                  Create Invoice
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/invoices/list']" class="nav-link text-sm">
+                <i class="fas fa-receipt nav-icon"></i>
+                <p>
+                  Invoice List
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <div class="nav-link">
+            <i class="fas fa-minus-circle nav-icon"></i>
+            <p>
+              Expenses
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </div>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a [routerLink]="['/expense-category']" class="nav-link text-sm">
+                <i class="fas fa-th-large nav-icon"></i>
+                <p>
+                  Expense Category
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a [routerLink]="['/expenses']" class="nav-link text-sm">
+                <i class="fas fa-plus-square nav-icon"></i>
+                <p>
+                  Expenses
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+
+        
+
+        <li class="nav-item d-none">
+          <div class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Manage Users
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </div>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-sm">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add User</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-sm">
+                <i class="far fa-circle nav-icon"></i>
+                <p>User List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-sm">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add Role</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <!--Reports-->
+        <li class="nav-item">
+          <div class="nav-link">
+            <i class="nav-icon fas fa-book"></i>
+            <p>
+              Reports
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </div>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-sm">
+                <i class="far fa-chart-bar nav-icon"></i>
+                <p>Service Sales Report</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-sm">
+                <i class="far fa-chart-bar nav-icon"></i>
+                <p>Expenses Report</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
